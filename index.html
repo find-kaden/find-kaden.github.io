@@ -1,0 +1,93 @@
+<html>
+<head>
+
+<style>
+
+body{   
+    margin: 0 auto;
+}
+
+.dog {
+	position: absolute;
+}
+
+</style>
+
+</head>
+<body onload="load_images();">
+</body>
+
+<script>
+
+NUM_OTHER_IMGS = 5;
+NUM_ITERS = 100;
+
+WINDOW_HEIGHT = window.innerHeight;
+WINDOW_WIDTH = window.innerWidth;
+
+DEFAULT_IMG_HEIGHT = 100;
+DEFAULT_IMG_WIDTH = 100;
+
+KADEN_X = get_rand_x(DEFAULT_IMG_WIDTH);
+KADEN_Y = get_rand_y(DEFAULT_IMG_HEIGHT);
+
+function load_images() {
+	for (var i = 0; i < NUM_ITERS; i++) {
+		load_other_images();
+	}
+	load_kaden_images();
+}
+
+function load_kaden_images() {
+	var img = get_image("images/kaden/k1.jpg", DEFAULT_IMG_WIDTH, DEFAULT_IMG_HEIGHT, KADEN_X, KADEN_Y);
+
+	img.onclick = hit_kaden_event;
+
+	add_image_to_window(img);
+}
+
+function hit_kaden_event() {
+	var click_x = event.clientX;
+	var click_y = event.clientY;
+
+	if (click_x >= KADEN_X && click_y >= KADEN_Y) {
+		alert("found kaden!");
+	}
+}
+
+function get_rand_x(img_width) {
+	return Math.floor(Math.random() * (WINDOW_WIDTH - img_width));
+}
+
+function get_rand_y(img_height) {
+	return Math.floor(Math.random() * (WINDOW_HEIGHT - img_height));
+}
+
+function load_other_images() {
+	for (var i = 1; i <= NUM_OTHER_IMGS; i++) {
+		var y = get_rand_y(DEFAULT_IMG_HEIGHT);
+		var x = get_rand_x(DEFAULT_IMG_WIDTH);
+
+		var img = get_image("images/others/" + i + ".jpg", DEFAULT_IMG_WIDTH, DEFAULT_IMG_HEIGHT, x, y);
+		add_image_to_window(img);
+	}
+}
+
+function get_image(src, width, height, xpos, ypos) {
+    var img = document.createElement("img");
+    img.src = src;
+    img.width = width;
+    img.height = height;
+    img.className = "dog";
+
+    img.style.padding = "" + ypos + "px 0px 0px " + xpos + "px";
+    return img;
+}
+
+function add_image_to_window(img) {
+	document.body.appendChild(img);
+}
+
+
+</script>
+</html>
