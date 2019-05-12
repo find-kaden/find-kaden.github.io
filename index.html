@@ -19,7 +19,7 @@ body{
 
 <script>
 
-NUM_OTHER_IMGS = 5;
+NUM_OTHER_IMGS = 10;
 NUM_ITERS = 100;
 
 WINDOW_HEIGHT = window.innerHeight;
@@ -36,6 +36,9 @@ function load_images() {
 		load_other_images();
 	}
 	load_kaden_images();
+
+	document.body.style.backgroundImage = "url('images/kaden/k1.jpg')"
+	alert("Find and click on Kaden's FACE!");
 }
 
 function load_kaden_images() {
